@@ -1,7 +1,6 @@
 const sql = require('./db.js');
 
-const Todo = function(todo) {
-    this.id = todo.id;
+const Todo = function (todo) {
     this.title = todo.title;
     this.dateBegin = todo.dateBegin;
     this.dateEnd = todo.dateEnd;
@@ -11,26 +10,26 @@ const Todo = function(todo) {
 
 Todo.create = (newTodo, result) => {
     sql.query("INSERT INTO todos SET ?", newTodo, (err, res) => {
-        if(err) {
+        if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
 
-        console.log("created tod: ", { id: res.insertId, ...newTodo});
+        console.log("created tod: ", { id: res.insertId, ...newTodo });
         result(null, { id: res.insertId, ...newTodo });
     });
 };
 
 Todo.findById = (todoId, result) => {
     sql.query(`SELECT * FROM todos WHERE id = ${todoId}`, (err, res) => {
-        if(err) {
+        if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
 
-        if(res.length) {
+        if (res.length) {
             console.log("found todo: ", res[0]);
             result(null, res[0]);
             return;
@@ -42,7 +41,7 @@ Todo.findById = (todoId, result) => {
 
 Todo.getAll = result => {
     sql.query("SELECT * FROM todos", (err, res) => {
-        if(err) {
+        if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
@@ -55,17 +54,17 @@ Todo.getAll = result => {
 
 Todo.updateById = (id, todo, result) => {
     sql.query(
-        "UPDATE todos SET title = ?, dateBegin = ?, dateEnd = ?, statut = ?, tags = ? WHERE id = ?",
-        [todo.title, todo.dateBegin, todo.dateEnd, todo.status, todo.tags, todo.id],
+        "UPDATE todos SET title = ?, dateBegin = ?, dateEnd = ?, status = ?, tags = ? WHERE id = ?",
+        [todo.title, todo.dateBegin, todo.dateEnd, todo.status, todo.tags, id],
         (err, res) => {
-            if(err) {
+            if (err) {
                 console.log("error: ", err);
                 result(err, null);
                 return;
             }
 
-            if(res.affectedRows == 0) {
-                result({ kind: "not_found"}, null);
+            if (res.affectedRows == 0) {
+                result({ kind: "not_found" }, null);
                 return;
             }
 
@@ -77,13 +76,13 @@ Todo.updateById = (id, todo, result) => {
 
 Todo.remove = (id, result) => {
     sql.query("DELETE FROM todos WHERE id = ?", id, (err, res) => {
-        if(err) {
+        if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
 
-        if(res.affectedRows == 0) {
+        if (res.affectedRows == 0) {
             result({ kind: "not_found" }, null);
             return;
         }
@@ -95,7 +94,7 @@ Todo.remove = (id, result) => {
 
 Todo.removeAll = result => {
     sql.query("DELETE FROM todos", (err, res) => {
-        if(err) {
+        if (err) {
             console.log("error: ", err);
             result(err, null);
             return;

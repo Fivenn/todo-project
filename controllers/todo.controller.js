@@ -1,12 +1,11 @@
 const Todo = require("../models/todo.model.js");
 
 exports.create = (req, res) => {
-    if(!req.body) {
+    if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
     }
-
     const todo = new Todo({
         title: req.body.title,
         dateBegin: req.body.dateBegin,
@@ -14,32 +13,30 @@ exports.create = (req, res) => {
         status: req.body.status,
         tags: req.body.tags
     });
-
     Todo.create(todo, (err, data) => {
-        if(err)
-        res.status(500).send({
-            message: err.message || "Some error occured while creating the Todo."
-        });
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occured while creating the Todo."
+            });
         else res.send(data);
     });
 };
 
 exports.findAll = (req, res) => {
     Todo.getAll((err, data) => {
-        if(err)
-        res.status(500).send({
-            message: err.message || "Some error occured while creating the Todo."
-        });
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occured while creating the Todo."
+            });
         else res.send(data);
     });
 };
 
 exports.findOne = (req, res) => {
     Todo.findById(req.params.todoId, (err, data) => {
-        if(err) {
-            if(err.kind === "not_found") {
+        if (err) {
+            if (err.kind === "not_found") {
                 res.status(404).send({
-
                     message: `Not found Todo with id ${req.params.todoId}.`
                 });
             } else {
@@ -52,7 +49,7 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    if(!req.body) {
+    if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty"
         });
@@ -61,8 +58,8 @@ exports.update = (req, res) => {
         req.params.todoId,
         new Todo(req.body),
         (err, data) => {
-            if(err) {
-                if(err.kind === "not_found") {
+            if (err) {
+                if (err.kind === "not_found") {
                     res.status(404).send({
                         message: `Not found Todo with id ${req.params.todoId}.`
                     });
@@ -70,18 +67,16 @@ exports.update = (req, res) => {
                     res.status(500).send({
                         message: "Error updating Todo with id " + req.params.todoId
                     });
-                } 
-            } else {
-                res.send(data);
-            }
+                }
+            } else res.send(data);
         }
     );
 };
 
 exports.delete = (req, res) => {
     Todo.remove(req.params.todoId, (err, data) => {
-        if(err) {
-            if(err.kind === "not_found") {
+        if (err) {
+            if (err.kind === "not_found") {
                 res.status(404).send({
                     message: `Not found Todo with id ${req.params.todoId}.`
                 });
@@ -96,7 +91,7 @@ exports.delete = (req, res) => {
 
 exports.deleteAll = (req, res) => {
     Todo.removeAll((err, data) => {
-        if(err) {
+        if (err) {
             res.status(500).send({
                 message: err.message || "Some error occured while removing all todos."
             });
