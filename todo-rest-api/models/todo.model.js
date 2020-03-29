@@ -16,7 +16,7 @@ Todo.create = (newTodo, result) => {
             return;
         }
 
-        console.log("created tod: ", { id: res.insertId, ...newTodo });
+        console.log("created todo: ", { id: res.insertId, ...newTodo });
         result(null, { id: res.insertId, ...newTodo });
     });
 };
