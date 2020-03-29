@@ -9,8 +9,8 @@
     <body>
         <h1>My Todo list</h1>
         <ul>
-            <% todolist.forEach(function(todo, index) { %>
-                <li><a href="/todo/delete/<%= index %>">❌</a><%= todo %></li>
+            <% todolist.forEach(function(todo) { %>
+                <li><a href="/todo/delete/<%= todo.id %>">❌</a><%= todo.title %></li>
                 <% }); %>
         </ul>
         <form action="/todo/add/" method="POST">

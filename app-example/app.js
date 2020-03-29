@@ -15,7 +15,7 @@ require("./routes/todo.routes.js")(app);
 
 app.use(function(req, res, next) {
     res.redirect('/todo');
-});
+})
 
 app.listen(3001, () => {
     console.log("App is running on port 3001.");
