@@ -17,9 +17,18 @@ exports.getTodos = (req, res) => {
 
 exports.addTodo = (req, res) => {
     if(req.body.newtodo != '') {
-        req.session.todolist.push(req.body.newtodo);
+        axios.post('http://localhost:3000/todos/', {
+            title: req.body.title,
+            dateBegin: req.body.dateBegin,
+            dateEnd: req.body.dateEnd,
+            status: req.body.status,
+            tags: req.body.tags
+        }).then(function(response) {
+            res.redirect('/todo');
+        }).catch(function(error) {
+            console.log(error);
+        })
     }
-    res.redirect('/todo');
 };
 
 exports.deleteTodo = (req, res) => {
