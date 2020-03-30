@@ -34,7 +34,6 @@ exports.addTodo = (req, res) => {
 exports.deleteTodo = (req, res) => {
     if(req.params.id != '') {
         axios.delete(`http://localhost:3000/todos/${req.params.id}`).then(function(response) {
-            req.session.todolist.splice(req.params.id, 1)
         }).catch(function(error) {
             console.log(error);
         }).then(function() {
