@@ -15,15 +15,18 @@
     <h1>Edit Todo</h1>
     <form action="/todo/update/<%= todo.id %>" method="POST">
         <p>
-            <input type="text" name="title" id="title" placeholder="<%= todo.title %>" autofocus />
-            <input type="date" name="dateBegin" id="dateBegin" value="<%= todo.dateBegin %>"/>
+            <input type="text" name="title" id="title" value="<%= todo.title %>" autofocus />
+            <input type="date" name="dateBegin" id="dateBegin" value="<%= todo.dateBegin %>" />
             <input type="date" name="dateEnd" id="dateEnd" value="<%= todo.dateEnd %>" />
             <select name="status" id="status">
                 <% statuslist.forEach(function(status) { %>
+                <% if(status.name == todo.status) { %>
+                <option value="<%= status.name %>" selected><%= status.name %></option>
+                <% } else { %>
                 <option value="<%= status.name %>"><%= status.name %></option>
-                <% }); %>
+                <% }}); %>
             </select>
-            <input type="text" name="tags" id="tags" placeholder="<%= todo.tags %>" autofocus />
+            <input type="text" name="tags" id="tags" value="<%= todo.tags %>" autofocus />
             <input type="submit" />
         </p>
     </form>
