@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>My Todo list</title>
+    <title>Edit Todo</title>
     <style>
         a {
             text-decoration: none;
@@ -12,19 +12,10 @@
 </head>
 
 <body>
-    <h1>My Todo list</h1>
-    <ul>
-        <% todolist.forEach(function(todo) { %>
-        <li>
-            <a href="/todo/delete/<%= todo.id %>">❌</a><a
-                href="/todo/edit/<%= todo.id %>">✎</a><%= `${todo.title} - ${todo.dateBegin} - ${todo.dateEnd} - ${todo.status} - ${todo.tags}` %>
-
-        </li>
-        <% }); %>
-    </ul>
-    <form action="/todo/add/" method="POST">
+    <h1>Edit Todo</h1>
+    <form action="/todo/update/<%= todo.id %>" method="POST">
         <p>
-            <input type="text" name="title" id="title" placeholder="New todo" autofocus />
+            <input type="text" name="title" id="title" placeholder="<%= todo.title %>" autofocus />
             <input type="date" name="dateBegin" id="dateBegin" placeholder="Beginning date" autofocus />
             <input type="date" name="dateEnd" id="dateEnd" placeholder="Stop date" autofocus />
             <select name="status" id="status">
@@ -32,7 +23,7 @@
                 <option value="<%= status.name %>"><%= status.name %></option>
                 <% }); %>
             </select>
-            <input type="text" name="tags" id="tags" placeholder="Tags" autofocus />
+            <input type="text" name="tags" id="tags" placeholder="<%= todo.tags %>" autofocus />
             <input type="submit" />
         </p>
     </form>
