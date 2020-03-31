@@ -19,10 +19,9 @@
                 <input type="date" name="dateBegin" id="dateBegin" placeholder="Beginning date" autofocus />
                 <input type="date" name="dateEnd" id="dateEnd" placeholder="Stop date" autofocus />
                 <select name="status" id="status">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
+                    <% statuslist.forEach(function(status) { %>
+                    <option value="<%= status.name %>"><%= status.name %></option>
+                    <% }); %>
                 </select>
                 <input type="text" name="tags" id="tags" placeholder="Tags" autofocus />
                 <input type="submit" />
