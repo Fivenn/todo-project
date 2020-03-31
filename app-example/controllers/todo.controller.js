@@ -2,6 +2,11 @@ const axios = require('axios'),
     Todo = require('../models/todo.model.js'),
     Status = require('../models/status.model.js');
 
+/**
+ * This function allows you to generate the todo home page with a todo creation interface on top.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.getTodos = (req, res) => {
     req.session.todolist = [];
     req.session.statuslist = [];
@@ -26,6 +31,11 @@ exports.getTodos = (req, res) => {
     })
 };
 
+/**
+ * This function allows you to create a todo from the information in the request.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.addTodo = (req, res) => {
     if (req.body.newtodo != '') {
         axios.post('http://localhost:3000/todos/', {
@@ -42,6 +52,11 @@ exports.addTodo = (req, res) => {
     }
 };
 
+/**
+ * This function allows you to remove a todo from the list according to its ID in the request.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.deleteTodo = (req, res) => {
     if (req.params.id != '') {
         axios.delete(`http://localhost:3000/todos/${req.params.id}`).then(function (response) {

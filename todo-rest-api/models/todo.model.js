@@ -8,6 +8,11 @@ const Todo = function (todo) {
     this.tags = todo.tags;
 };
 
+/**
+ * This function allows you to execute a SQL query in order to create a new Todo.
+ * @param newTodo - The new Todo to be added to the database.
+ * @param result - The result of the resquest.
+ */
 Todo.create = (newTodo, result) => {
     sql.query("INSERT INTO todos SET ?", newTodo, (err, res) => {
         if (err) {
@@ -21,6 +26,11 @@ Todo.create = (newTodo, result) => {
     });
 };
 
+/**
+ * This function allows you to execute a SQL query in order to return a Todo according to its ID.
+ * @param todoId - The ID of the Todo to be returned.
+ * @param result - The result of the resquest.
+ */
 Todo.findById = (todoId, result) => {
     sql.query(`SELECT * FROM todos WHERE id = ${todoId}`, (err, res) => {
         if (err) {
@@ -39,6 +49,10 @@ Todo.findById = (todoId, result) => {
     });
 };
 
+/**
+ * This function allows you to create a SQL query in order to return all the Todos of the database.
+ * @param result - The result of the resquest.
+ */
 Todo.getAll = result => {
     sql.query("SELECT * FROM todos", (err, res) => {
         if (err) {
@@ -52,6 +66,12 @@ Todo.getAll = result => {
     });
 };
 
+/**
+ * This function allows you to create an SQL query in order to update a Todo of the database from its ID.
+ * @param id - The ID of the Todo to be updated.
+ * @param todo - The new content of the Todo to be updated.
+ * @param result - The result of the resquest.
+ */
 Todo.updateById = (id, todo, result) => {
     sql.query(
         "UPDATE todos SET title = ?, dateBegin = ?, dateEnd = ?, status = ?, tags = ? WHERE id = ?",
@@ -74,6 +94,11 @@ Todo.updateById = (id, todo, result) => {
     );
 };
 
+/**
+ * This function allows you to perform a SQL query in order to remove a Todo from the database based on its ID.
+ * @param id - The ID of the Todo to be removed.
+ * @param result - The result of the resquest.
+ */
 Todo.remove = (id, result) => {
     sql.query("DELETE FROM todos WHERE id = ?", id, (err, res) => {
         if (err) {
@@ -92,6 +117,10 @@ Todo.remove = (id, result) => {
     });
 };
 
+/**
+ * This function allows you to perform a SQL query in order to remove all the Todos from the database.
+ * @param result - The result of the resquest.
+ */
 Todo.removeAll = result => {
     sql.query("DELETE FROM todos", (err, res) => {
         if (err) {
