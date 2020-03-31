@@ -34,10 +34,10 @@ exports.addTodo = (req, res) => {
             dateEnd: req.body.dateEnd,
             status: req.body.status,
             tags: req.body.tags
-        }).then(function (response) {
-            res.redirect('/todo');
         }).catch(function (error) {
             console.log(error);
+        }).then(function (response) {
+            res.redirect('/todo');
         })
     }
 };
