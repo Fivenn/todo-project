@@ -16,9 +16,14 @@
         <form action="/todo/add/" method="POST">
             <p>
                 <input type="text" name="title" id="title" placeholder="New todo" autofocus />
-                <input type="text" name="dateBegin" id="dateBegin" placeholder="Beginning date" autofocus />
-                <input type="text" name="dateEnd" id="dateEnd" placeholder="Stop date" autofocus />
-                <input type="text" name="status" id="status" placeholder="Status" autofocus />
+                <input type="date" name="dateBegin" id="dateBegin" placeholder="Beginning date" autofocus />
+                <input type="date" name="dateEnd" id="dateEnd" placeholder="Stop date" autofocus />
+                <select name="status" id="status">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
                 <input type="text" name="tags" id="tags" placeholder="Tags" autofocus />
                 <input type="submit" />
             </p>
