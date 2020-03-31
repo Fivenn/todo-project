@@ -2,14 +2,11 @@ const axios = require('axios'),
     Todo = require('../models/todo.model.js'),
     Status = require('../models/status.model.js');
 
-exports.getTodos = (req, res) => {
-    req.session.todolist = [];
+exports.getTodo = (req, res) => {
     req.session.statuslist = [];
-    axios.get('http://localhost:3000/todos/').then(function (response) {
-        response.data.forEach(element => {
-            const todo = new Todo(element);
-            req.session.todolist.push(todo);
-        });
+    axios.get(`http://localhost:3000/todos/${req.params.id}`).then(function (response) {
+        const todo = new Todo(response.data);
+        req.session.todo = todo;
         return axios.get('http://localhost:3000/status/');
     }).then(function (response) {
         response.data.forEach(element => {
@@ -19,16 +16,16 @@ exports.getTodos = (req, res) => {
     }).catch(function (error) {
         console.log(error);
     }).then(function () {
-        res.render('todo.ejs', {
-            todolist: req.session.todolist,
+        res.render('todo_edit.ejs', {
+            todo: req.session.todo,
             statuslist: req.session.statuslist
         });
     })
 };
 
-exports.addTodo = (req, res) => {
-    if (req.body.newtodo != '') {
-        axios.post('http://localhost:3000/todos/', {
+exports.updateTodo = (req, res) => {
+    if (req.body.newTodo != '' && req.params.id != '') {
+        axios.put(`http://localhost:3000/todos/${req.params.id}`, {
             title: req.body.title,
             dateBegin: req.body.dateBegin,
             dateEnd: req.body.dateEnd,
@@ -37,17 +34,6 @@ exports.addTodo = (req, res) => {
         }).catch(function (error) {
             console.log(error);
         }).then(function (response) {
-            res.redirect('/todo');
-        })
-    }
-};
-
-exports.deleteTodo = (req, res) => {
-    if (req.params.id != '') {
-        axios.delete(`http://localhost:3000/todos/${req.params.id}`).then(function (response) {
-        }).catch(function (error) {
-            console.log(error);
-        }).then(function () {
             res.redirect('/todo');
         })
     }

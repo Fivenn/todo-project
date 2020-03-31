@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
     Todo.getAll((err, data) => {
         if (err)
             res.status(500).send({
-                message: err.message || "Some error occured while creating the Todo."
+                message: err.message || "Some error occured while getting Todos."
             });
         else res.send(data);
     });
