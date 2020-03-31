@@ -16,8 +16,8 @@
     <form action="/todo/update/<%= todo.id %>" method="POST">
         <p>
             <input type="text" name="title" id="title" placeholder="<%= todo.title %>" autofocus />
-            <input type="date" name="dateBegin" id="dateBegin" placeholder="Beginning date" autofocus />
-            <input type="date" name="dateEnd" id="dateEnd" placeholder="Stop date" autofocus />
+            <input type="date" name="dateBegin" id="dateBegin" value="<%= todo.dateBegin %>"/>
+            <input type="date" name="dateEnd" id="dateEnd" value="<%= todo.dateEnd %>" />
             <select name="status" id="status">
                 <% statuslist.forEach(function(status) { %>
                 <option value="<%= status.name %>"><%= status.name %></option>
