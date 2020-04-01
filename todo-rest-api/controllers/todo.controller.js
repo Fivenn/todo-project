@@ -131,10 +131,25 @@ exports.deleteAll = (req, res) => {
 
 exports.findUnfinished = (req, res) => {
     Todo.getUnfinished((err, data) => {
-        if (err)
-            res.status(500).send({
+        if (err) res.status(500).send({
                 message: err.message || "Some error occured while getting Todos."
             });
         else res.send(data);
+    });
+};
+
+exports.findByStatus = (req, res) => {
+    Todo.getByStatus(req.params.todoStatus, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Todo with status ${req.params.todoStatus}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving Todo with id " + req.params.todoStatus
+                });
+            }
+        } else res.send(data);
     });
 };

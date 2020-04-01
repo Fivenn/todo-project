@@ -148,4 +148,20 @@ Todo.getUnfinished = result => {
     });
 };
 
+Todo.getByStatus = (todoStatus, result) => {
+    sql.query(`SELECT * FROM todos WHERE status = "${todoStatus}"`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("found todo: ", res);
+            result(null, res);
+            return;
+        }
+        result({ kind: "not_found" }, null);
+    });
+};
+
 module.exports = Todo;
