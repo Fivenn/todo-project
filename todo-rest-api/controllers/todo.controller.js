@@ -1,5 +1,10 @@
 const Todo = require("../models/todo.model.js");
 
+/**
+ * This function allows you to create a new Todo in the database.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.create = (req, res) => {
     if (!req.body) {
         res.status(400).send({
@@ -22,6 +27,11 @@ exports.create = (req, res) => {
     });
 };
 
+/**
+ * This function allows you to return all the Todos from the database.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.findAll = (req, res) => {
     Todo.getAll((err, data) => {
         if (err)
@@ -32,6 +42,11 @@ exports.findAll = (req, res) => {
     });
 };
 
+/**
+ * This function allows you to return a Todo from the database according to the Todo ID. 
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.findOne = (req, res) => {
     Todo.findById(req.params.todoId, (err, data) => {
         if (err) {
@@ -48,6 +63,11 @@ exports.findOne = (req, res) => {
     });
 };
 
+/**
+ * This function allows you to update a Todo in the database from its ID.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.update = (req, res) => {
     if (!req.body) {
         res.status(400).send({
@@ -73,6 +93,11 @@ exports.update = (req, res) => {
     );
 };
 
+/**
+ * This function allows you to delete a Todo from the database according to its ID.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.delete = (req, res) => {
     Todo.remove(req.params.todoId, (err, data) => {
         if (err) {
@@ -89,6 +114,11 @@ exports.delete = (req, res) => {
     });
 };
 
+/**
+ * This function allows you to delete all the Todos from the database.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.deleteAll = (req, res) => {
     Todo.removeAll((err, data) => {
         if (err) {

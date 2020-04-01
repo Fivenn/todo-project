@@ -2,6 +2,11 @@ const axios = require('axios'),
     Todo = require('../models/todo.model.js'),
     Status = require('../models/status.model.js');
 
+/**
+ * This function allows to generate the editing page of a todo with its information in the request.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.getTodo = (req, res) => {
     req.session.statuslist = [];
     axios.get(`http://localhost:3000/todos/${req.params.id}`).then(function (response) {
@@ -23,6 +28,11 @@ exports.getTodo = (req, res) => {
     })
 };
 
+/**
+ * This function allows to update a todo from its information in the request.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.updateTodo = (req, res) => {
     if (req.body.newTodo != '' && req.params.id != '') {
         axios.put(`http://localhost:3000/todos/${req.params.id}`, {
