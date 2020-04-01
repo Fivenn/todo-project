@@ -52,3 +52,6 @@ exports.deleteTodo = (req, res) => {
         })
     }
 };
+
+exports.getUnfinishedTodos = (req, res) => {
+};

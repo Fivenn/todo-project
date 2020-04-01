@@ -98,3 +98,13 @@ exports.deleteAll = (req, res) => {
         } else res.send({ message: `All Todos was deleted successfully!` });
     });
 };
+
+exports.findUnfinished = (req, res) => {
+    Todo.getUnfinished((err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occured while getting Todos."
+            });
+        else res.send(data);
+    });
+};
