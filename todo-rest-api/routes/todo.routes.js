@@ -4,9 +4,11 @@ module.exports = app => {
 
     app.post("/todos", todos.create);
     app.get("/todos", todos.findAll);
-    app.get("/todos/:todoId", todos.findOne);
+    app.delete("/todos", todos.deleteAll);
+    app.get("/todos/unfinished", todos.findUnfinished);
     app.get("/status", status.findAll);
+    app.get("/todos/:todoStatus", todos.findByStatus);
     app.put("/todos/:todoId", todos.update);
     app.delete("/todos/:todoId", todos.delete);
-    app.delete("/todos", todos.deleteAll);
+    app.get("/todos/:todoId", todos.findOne);
 };
