@@ -1,6 +1,6 @@
 const sql = require('./db.js');
 
-const Status = function(status) {
+const Status = function (status) {
     this.name = status.name;
 };
 
@@ -10,7 +10,7 @@ const Status = function(status) {
  */
 Status.getAll = result => {
     sql.query("SELECT * FROM status", (err, res) => {
-        if(err) {
+        if (err) {
             console.log("error: ", err);
             result(err, null);
             return

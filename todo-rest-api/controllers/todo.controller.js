@@ -129,15 +129,25 @@ exports.deleteAll = (req, res) => {
     });
 };
 
+/**
+ * This function allows to retrieve in database the Todos which are not finished.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.findUnfinished = (req, res) => {
     Todo.getUnfinished((err, data) => {
         if (err) res.status(500).send({
-                message: err.message || "Some error occured while getting Todos."
-            });
+            message: err.message || "Some error occured while getting Todos."
+        });
         else res.send(data);
     });
 };
 
+/**
+ * This function allows the Todos to be retrieved from the database according to their status.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with this function.
+ */
 exports.findByStatus = (req, res) => {
     Todo.getByStatus(req.params.todoStatus, (err, data) => {
         if (err) {

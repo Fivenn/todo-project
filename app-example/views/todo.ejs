@@ -3,41 +3,59 @@
 
 <head>
     <title>My Todo list</title>
-    <style>
-        a {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
     <h1>My Todo list</h1>
-    <ul>
-        <li><a href="/todo">Home</a></li>
-        <li><a href="/todo/unfinished">Unfinished Todos</a></li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/todo">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/todo/unfinished">Unfinished Todos</a>
+            </div>
+        </div>
+    </nav>
     <form action="/todo/status/" method="POST">
-        <p>
+        <div class="form-row align-items-center col-auto">
             <select name="selectStatus" id="selectStatus">
                 <% statuslist.forEach(function(status) { %>
                 <option value="<%= status.name %>"><%= status.name %></option>
                 <% }); %>
             </select>
-            <input type="submit" />
-        </p>
+            <input type="submit" class="btn btn-primary mb-2" />
+        </div>
     </form>
-    <ul>
-        <% todolist.forEach(function(todo) { %>
-        <li>
-            <a href="/todo/delete/<%= todo.id %>">❌</a><a
-                href="/todo/edit/<%= todo.id %>">✎</a><%= `${todo.title} - ${todo.dateBegin} - ${todo.dateEnd} - ${todo.status} - ${todo.tags}` %>
+    <table class="table table">
+        <thead>
+            <tr>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Todo</th>
+                <th scope="col">Date begin</th>
+                <th scope="col">Date end</th>
+                <th scope="col">Status</th>
+                <th scope="col">Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% todolist.forEach(function(todo) { %>
+            <tr>
+                <td><a href="/todo/delete/<%= todo.id %>">❌</a></td>
+                <td><a href="/todo/edit/<%= todo.id %>">✏️</a></td>
+                <td><%= todo.title %></td>
+                <td><%= todo.dateBegin %></td>
+                <td><%= todo.dateEnd %></td>
+                <td><%= todo.status %></td>
+                <td><%= todo.tags %></td>
+            </tr>
 
-        </li>
-        <% }); %>
-    </ul>
+            <% }); %>
+        </tbody>
+    </table>
     <form action="/todo/add/" method="POST">
-        <p>
+        <div class="form-row align-items-center col-auto">
             <input type="text" name="title" id="title" placeholder="New todo" autofocus />
             <input type="date" name="dateBegin" id="dateBegin" placeholder="Beginning date" autofocus />
             <input type="date" name="dateEnd" id="dateEnd" placeholder="Stop date" autofocus />
@@ -47,8 +65,8 @@
                 <% }); %>
             </select>
             <input type="text" name="tags" id="tags" placeholder="Tags" autofocus />
-            <input type="submit" />
-        </p>
+            <input type="submit" class="btn btn-primary mb-2" />
+        </div>
     </form>
 </body>
 
