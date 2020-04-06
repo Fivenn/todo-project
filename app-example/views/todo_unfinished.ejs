@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Todo list</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Todo list</h1>
+    <ul>
+        <li><a href="/todo">Home</a></li>
+        <li><a href="/todo/unfinished">Unfinished Todos</a></li>
+    </ul>
+    <ul>
+        <% todolist.forEach(function(todo) { %>
+        <li>
+            <a href="/todo/delete/<%= todo.id %>">❌</a><a
+                href="/todo/edit/<%= todo.id %>">✎</a><%= `${todo.title} - ${todo.dateBegin} - ${todo.dateEnd} - ${todo.status} - ${todo.tags}` %>
+
+        </li>
+        <% }); %>
+    </ul>
+</body>
+
+</html>

@@ -7,8 +7,8 @@ module.exports = app => {
     app.delete("/todos", todos.deleteAll);
     app.get("/todos/unfinished", todos.findUnfinished);
     app.get("/status", status.findAll);
-    app.get("/todos/:todoStatus", todos.findByStatus);
     app.put("/todos/:todoId", todos.update);
     app.delete("/todos/:todoId", todos.delete);
     app.get("/todos/:todoId", todos.findOne);
+    app.get("/todos/status/:todoStatus", todos.findByStatus);
 };
