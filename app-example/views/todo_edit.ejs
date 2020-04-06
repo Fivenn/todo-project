@@ -3,18 +3,22 @@
 
 <head>
     <title>Edit Todo</title>
-    <style>
-        a {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
     <h1>Edit Todo</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/todo">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/todo/unfinished">Unfinished Todos</a>
+            </div>
+        </div>
+    </nav>
     <form action="/todo/update/<%= todo.id %>" method="POST">
-        <p>
+        <div class="form-row align-items-center col-auto">
             <input type="text" name="title" id="title" value="<%= todo.title %>" autofocus />
             <input type="date" name="dateBegin" id="dateBegin" value="<%= todo.dateBegin %>" />
             <input type="date" name="dateEnd" id="dateEnd" value="<%= todo.dateEnd %>" />
@@ -28,7 +32,7 @@
             </select>
             <input type="text" name="tags" id="tags" value="<%= todo.tags %>" autofocus />
             <input type="submit" />
-        </p>
+        </div>
     </form>
 </body>
 

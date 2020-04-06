@@ -68,22 +68,32 @@ exports.deleteTodo = (req, res) => {
     }
 };
 
+/**
+ * This function allows you to retrieve the Todos that are not finished.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.getUnfinishedTodos = (req, res) => {
     req.session.todolist = [];
-    axios.get('http://localhost:3000/todos/unfinished').then(function(response) {
+    axios.get('http://localhost:3000/todos/unfinished').then(function (response) {
         response.data.forEach(element => {
             const todo = new Todo(element);
             req.session.todolist.push(todo);
         });
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log(error);
-    }).then(function() {
+    }).then(function () {
         res.render('todo_unfinished.ejs', {
             todolist: req.session.todolist
         });
     })
 };
 
+/**
+ * This function allows you to retrieve the Todos according to their status.
+ * @param req - The request associated with this function.
+ * @param res - The result associated with the function.
+ */
 exports.getByStatus = (req, res) => {
     req.session.todolist = [];
     req.session.statuslist = [];

@@ -1,14 +1,14 @@
 const sql = require('./db.js');
 
-var curday = function(sp) {
+var curday = function (sp) {
     today = new Date();
     var dd = today.getDate();
-    var mm = today.getMonth()+1; //As January is 0.
+    var mm = today.getMonth() + 1; //As January is 0.
     var yyyy = today.getFullYear();
-    
-    if(dd<10) dd='0'+dd;
-    if(mm<10) mm='0'+mm;
-    return (yyyy+sp+mm+sp+dd);
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    return (yyyy + sp + mm + sp + dd);
 };
 
 const Todo = function (todo) {
@@ -136,6 +136,10 @@ Todo.removeAll = result => {
     });
 };
 
+/**
+ * This function allows you to perform a SQL query in order to get all unfinished Todos from the database.
+ * @param result - The result of the resquest.
+ */
 Todo.getUnfinished = result => {
     sql.query(`SELECT * FROM todos WHERE status <> "Annulé" AND status <> "Achevée" AND dateEnd >= "${curday('-')}"`, (err, res) => {
         if (err) {
@@ -148,6 +152,11 @@ Todo.getUnfinished = result => {
     });
 };
 
+/**
+ * This function allows you to perform a SQL query in order to get Todos from the database based on their status.
+ * @param id - The ID of the Todo to be removed.
+ * @param result - The result of the resquest.
+ */
 Todo.getByStatus = (todoStatus, result) => {
     sql.query(`SELECT * FROM todos WHERE status = "${todoStatus}"`, (err, res) => {
         if (err) {
